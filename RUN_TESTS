@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+script_files="read_ints*.py"
+input_files=(read_ints_input_small.txt read_ints_input_92M.txt)
+results=(4 3080)
+
+for i in {0..1}; do
+    file=${input_files[i]}
+    result=${results[i]}
+    for script in $script_files; do
+        echo $script $file $result
+        time diff <(python $script < $file) <(echo $result)
+    done
+done
